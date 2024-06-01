@@ -1,0 +1,5 @@
+{:name "Barclays"
+ :columns ["Transaction Date", "Description","Category","Amount"]
+ :map-to {:Date "Transaction Date", :Description "Description", :Amount "Amount"}
+ :source "Jetblue"
+ :pre-parse-fn :split-by-newline}

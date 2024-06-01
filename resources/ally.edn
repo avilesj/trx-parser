@@ -1,0 +1,6 @@
+{:name "Ally"
+ :source "Ally"
+ :columns [:Date, :Time, :Amount, :Type, :Description]
+ :date-format "YYYY-MM-DD"
+ :map-to {:Date "Date", :Amount "Amount", :Description "Description"}
+ :pre-parse-fn nil}
