@@ -8,4 +8,5 @@
   :main ^:skip-aot trx-classifier.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all
-                       :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}})
+                       :jvm-opts ["-Dclojure.compiler.direct-linking=true"]
+                       :jar-name "trx-classifier.jar"}})
