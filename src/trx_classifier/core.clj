@@ -5,7 +5,7 @@
 
 (defn parse-args [args]
   (if (seq args)
-    (let [[[dir & files]] (into [] args)]
+    (let [[dir & files] (into [] args)]
       [dir files])
     (println "No args provided")))
 
@@ -13,7 +13,7 @@
   "I don't do a whole lot ... yet."
   [& args]
   (let [[config-dir files] (parse-args args)]
-    (io/read-csv files config-dir ".")))
+    (io/parse-transaction-files config-dir files)))
 
 
 

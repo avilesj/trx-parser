@@ -19,8 +19,6 @@
 (defn map-row
   "Maps CSV row to EDN map"
   [row headers]
-  (println row)
-  (println headers)
   (zipmap headers row))
 
 (defn transform-record
@@ -30,14 +28,16 @@
 
 (defn transform-values [record date-format]
   [(transform-date (get record :Date) date-format)
-   (amount-to-string (get record :Amount))
-   (get record :Description)])
+   (get record :Description)
+   (amount-to-string (get record :Amount))])
+
+(defn format-columns [columns]
+  (mapv (fn [column] (keyword (str/replace column #" " "-"))) columns))
 
 (defn transform-row [row config]
-  (println config)
   (let [{:keys [columns map-to date-format]} config]
     (-> row
-        (map-row columns)
+        (map-row (format-columns columns))
         (transform-record map-to)
         (transform-values date-format))))
 

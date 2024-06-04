@@ -5,7 +5,7 @@
    [clojure.edn :as edn]))
 
 (defn select-csv-format [csv-headers edn-configs]
-  (let [csv-headers-keyworded (mapv (fn [header] (keyword (str/trim header))) csv-headers)]
+  (let [csv-headers-keyworded (mapv (fn [header] (str/trim header)) csv-headers)]
     (first (filter #(= csv-headers-keyworded (get % :columns)) edn-configs))))
 
 (defn read-edn [filename]

@@ -13,12 +13,16 @@
 (defn assemble-csv [header data]
   (into [header] data))
 
-(defn read-csv [file config-path output-file]
+(defn read-csv [file configs]
   (with-open [reader (io/reader file)]
     (doall
      (let [[headers & data] (csv/read-csv reader)]
-       (->> (cfg/load-edn-from-path config-path)
-            (cfg/select-csv-format headers)
-            (transform/transform-data data)
-            (assemble-csv output-header)
-            (write-csv output-file))))))
+       (->> (cfg/select-csv-format headers configs)
+            (transform/transform-data data))))))
+
+(defn parse-transaction-files [config-dir files]
+  (let [configs (cfg/load-edn-from-path config-dir)]
+    (->>
+     (mapcat #(read-csv % configs) files)
+     (assemble-csv output-header)
+     (write-csv "output"))))
